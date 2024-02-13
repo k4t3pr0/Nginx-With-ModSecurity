@@ -1,14 +1,14 @@
 
-# How to Install ModSecurity 3, OWASP CRS with Nginx on Ubuntu 22.04 or 20.04
+## How to Install ModSecurity 3, OWASP CRS with Nginx on Ubuntu 22.04 or 20.04
 
-## Step 1: Update Ubuntu Before Modsecurity 3 Installation
+### Step 1: Update Ubuntu Before Modsecurity 3 Installation
 The first step towards a secure and efficient server is keeping it up-to-date. This ensures all software packages have the latest security patches and performance improvements. Execute the following command to update your system:
  ```console
 sudo apt update && sudo apt upgrade 
  ```
 This command first updates the package lists for upgrades (sudo apt update).
 
-## Step 2: Remove Pre-existing Nginx Installation (Situational)
+### Step 2: Remove Pre-existing Nginx Installation (Situational)
 If you have a pre-existing Nginx installation, we recommend removing it and installing the latest version from a custom PPA maintained by Ondřej Surý. This version has additional dynamic modules, such as the Brotli module, for improved compression.
 
 First, stop the current Nginx service with the following:
@@ -21,7 +21,7 @@ sudo apt purge nginx -y && sudo apt autoremove nginx -y
  ```
 Here, the purge option completely removes the Nginx package and its configuration files. The autoremove command removes any packages that were automatically installed to satisfy Nginx’s dependencies but are no longer needed.
 
-## Step 3: Add the Latest Nginx PPA (Optional)
+### Step 3: Add the Latest Nginx PPA (Optional)
 Remove the outdated Nginx service, then add a new, current PPA (Personal Package Archive) for Nginx. Choose between a stable or mainline version; opt for the mainline version to access the latest features and improvements.
 
 To add the stable PPA, execute:
@@ -32,7 +32,7 @@ Or for the mainline PPA, use:
  ```console
 sudo add-apt-repository ppa:ondrej/nginx-mainline -y
  ```
-## Step 4: Update Packages Index After Nginx PPA Import on Ubuntu
+### Step 4: Update Packages Index After Nginx PPA Import on Ubuntu
 After importing the desired repository, updating your APT sources list is necessary. This ensures the system knows about the new packages in the added repository. Update your sources list with the following:
  ```console
 sudo apt update
@@ -43,7 +43,7 @@ sudo apt install nginx
  ```
 During the installation, you may be prompted to keep or replace your existing /etc/nginx/nginx.conf configuration file. It’s generally recommended to keep your current configuration file by pressing n.
 
-## Step 5: Uncomment DEB-SRC Nginx Source on Ubuntu
+### Step 5: Uncomment DEB-SRC Nginx Source on Ubuntu
 The PPA installation process does not include the Nginx source code by default. You must enable a specific feature and manually download the Nginx source code to compile Modsecurity later in this tutorial.
 
 Open the configuration file located in /etc/apt/sources.list.d:
@@ -51,7 +51,7 @@ Open the configuration file located in /etc/apt/sources.list.d:
 sudo nano /etc/apt/sources.list.d/ondrej-ubuntu-nginx-mainline-*.list
  ```
 Find the line that starts with # deb-src and uncomment it (i.e., remove the #). If you use a different third-party repository, replace the path in the command with the appropriate one:
-```
+```console
 deb-src http://ppa.launchpad.net/ondrej/nginx-mainline/ubuntu/ jammy main
 ```
 Once done, save the file by pressing CTRL+O and then exit by pressing CTRL+X.
@@ -65,15 +65,15 @@ Finally, update the repository list using the following command:
 sudo apt update
 ```
 
-# Securing Nginx With ModSecurity
 ## Securing Nginx With ModSecurity
+### Securing Nginx With ModSecurity
 
 ## What is ModSecurity?
 - ModSecurity is a free and open source web application that started out as an Apache module and grew to a fully-fledged web application firewall. It works by inspecting requests sent to the web server in real time against a predefined rule set, preventing typical web application attacks like XSS and SQL Injection.
 
 - While originally an Apache module, ModSecurity can also be installed on Nginx as detailed in this guide.
 
-## Prerequisites & Requirements
+### Prerequisites & Requirements
 In order to install and configure ModSecurity, you need to have a Linux server with the following services running:
 
 	Nginx
