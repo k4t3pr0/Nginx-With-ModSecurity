@@ -51,8 +51,9 @@ Open the configuration file located in /etc/apt/sources.list.d:
 sudo nano /etc/apt/sources.list.d/ondrej-ubuntu-nginx-mainline-*.list
  ```
 Find the line that starts with # deb-src and uncomment it (i.e., remove the #). If you use a different third-party repository, replace the path in the command with the appropriate one:
-# deb-src http://ppa.launchpad.net/ondrej/nginx-mainline/ubuntu/ jammy main
-
+```
+deb-src http://ppa.launchpad.net/ondrej/nginx-mainline/ubuntu/ jammy main
+```
 Once done, save the file by pressing CTRL+O and then exit by pressing CTRL+X.
 
 If you’re more comfortable with command-line utilities, you can also use the sed command to uncomment the source line:
