@@ -239,22 +239,18 @@ With a text editor such as vim, open /etc/modsecurity/modsecurity.conf and chang
 
 
 File: /etc/modsecurity/modsecurity.conf
-# -- Rule engine initialization ----------------------------------------------
-
-# Enable ModSecurity, attaching it to every transaction. Use detection
-# only to start with, because that minimises the chances of post-installation
-# disruption.
-#
-SecRuleEngine On
+## - Rule engine initialization
+## - Enable ModSecurity, attaching it to every transaction. Use detection only to start with, because that minimises the chances of post-installation disruption.
+- SecRuleEngine On
 ...
 Create a new configuration file called main.conf under the /etc/nginx/modsec directory:
  ```console
 sudo touch /etc/nginx/modsec/main.conf
  ```
-Open /etc/nginx/modsec/main.conf with a text editor such as vim and specify the rules and the Modsecurity configuration file for Nginx by inserting following lines:
+- Open /etc/nginx/modsec/main.conf with a text editor such as vim and specify the rules and the Modsecurity configuration file for Nginx by inserting following lines:
 
 
-File: /etc/modsecurity/modsecurity.conf
+- File: /etc/modsecurity/modsecurity.conf
  ```console
 Include /etc/nginx/modsec/modsecurity.conf
 Include /usr/local/modsecurity-crs/crs-setup.conf
@@ -268,7 +264,6 @@ Open the /etc/nginx/sites-available/default with a text editor such as vim and i
 modsecurity on;
 modsecurity_rules_file /etc/nginx/modsec/main.conf;
 Here is an example configuration file that includes the above lines:
-
 
 File: /etc/nginx/sites-available/default
 server {
